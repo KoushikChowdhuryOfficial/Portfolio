@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koushik Chowdhury — AI/ML Developer</title>
+<meta name="description" content="Koushik Chowdhury — AI/ML developer and student, working in machine learning, deep learning, and neural networks.">
+<meta name="theme-color" content="#08080a">
+
+<meta property="og:title" content="Koushik Chowdhury — AI/ML Developer">
+<meta property="og:description" content="AI/ML developer and student, working in machine learning, deep learning, and neural networks.">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2308080a'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23ff2b3a' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%23ff2b3a'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#08080a;
+    --surface:#111114;
+    --line:#232228;
+    --crimson:#a3131a;
+    --crimson-bright:#ff2b3a;
+    --text:#e9e7e4;
+    --muted:#84828c;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Orbitron', sans-serif;
+    --body: 'Rajdhani', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    overflow-x:hidden;
+  }
+
+  /* ambient scanline / noise texture */
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+    z-index:2;
+  }
+  body::after{
+    content:'';
+    position:fixed; inset:0;
+    background:radial-gradient(ellipse at 50% -10%, rgba(163,19,26,0.16), transparent 55%);
+    pointer-events:none;
+    z-index:1;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px;position:relative;z-index:3;}
+
+  /* NAV */
+  nav{
+    position:fixed; top:0; left:0; right:0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 40px;
+    z-index:50;
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.05em;
+    backdrop-filter:blur(6px);
+    background:linear-gradient(to bottom, rgba(8,8,10,0.85), transparent);
+  }
+  .logo{color:var(--crimson-bright); font-weight:700;}
+  .logo span{color:var(--muted);}
+  .navlinks{display:flex;gap:32px;}
+  .navlinks a{color:var(--muted); transition:color .25s;}
+  .navlinks a:hover{color:var(--text);}
+  .navlinks a:focus-visible, a:focus-visible{outline:1px solid var(--crimson-bright); outline-offset:3px;}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;
+    display:flex; flex-direction:column; justify-content:center;
+    padding-top:120px; padding-bottom:80px;
+    position:relative;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--crimson-bright);
+    letter-spacing:0.12em;
+    margin-bottom:22px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:7px;height:7px;border-radius:50%;
+    background:var(--crimson-bright);
+    box-shadow:0 0 10px 2px var(--crimson-bright);
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+
+  h1.name{
+    font-family:var(--display);
+    font-weight:900;
+    font-size:clamp(2.6rem, 8vw, 6.2rem);
+    line-height:0.98;
+    letter-spacing:-0.01em;
+    text-transform:uppercase;
+    color:var(--text);
+  }
+  h1.name .accent{color:var(--crimson-bright);}
+
+  .terminal-line{
+    margin-top:28px;
+    font-family:var(--mono);
+    font-size:clamp(0.95rem, 2vw, 1.15rem);
+    color:var(--muted);
+    min-height:1.6em;
+  }
+  .terminal-line .cursor{
+    display:inline-block;width:9px;height:1.1em;background:var(--crimson-bright);
+    vertical-align:text-bottom; margin-left:2px;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-sub{
+    margin-top:34px;
+    max-width:560px;
+    font-size:1.15rem;
+    line-height:1.6;
+    color:#b9b7bd;
+    font-weight:500;
+  }
+
+  .hero-cta{
+    margin-top:44px;
+    display:flex; gap:18px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.06em;
+    padding:15px 28px;
+    border:1px solid var(--line);
+    transition:all .25s ease;
+  }
+  .btn-primary{
+    background:var(--crimson);
+    border-color:var(--crimson);
+    color:#fff;
+  }
+  .btn-primary:hover{background:var(--crimson-bright); border-color:var(--crimson-bright); box-shadow:0 0 24px rgba(255,43,58,0.4);}
+  .btn-ghost{color:var(--text);}
+  .btn-ghost:hover{border-color:var(--crimson-bright); color:var(--crimson-bright);}
+
+  .scroll-hint{
+    position:absolute; bottom:36px; left:32px;
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    display:flex; align-items:center; gap:10px;
+    letter-spacing:0.1em;
+  }
+  .scroll-hint .bar{width:1px;height:30px;background:linear-gradient(var(--crimson-bright), transparent);}
+
+  /* SECTION SHARED */
+  section{padding:130px 0;border-top:1px solid var(--line);position:relative;}
+  .section-head{margin-bottom:64px;}
+  .section-tag{
+    font-family:var(--mono); font-size:12px; color:var(--crimson-bright);
+    letter-spacing:0.15em; text-transform:uppercase; margin-bottom:14px;
+  }
+  .section-title{
+    font-family:var(--display);
+    font-size:clamp(1.8rem, 4vw, 2.8rem);
+    text-transform:uppercase;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+
+  /* ABOUT */
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:70px;
+  }
+  .about-text p{
+    font-size:1.15rem; line-height:1.75; color:#c7c5cb; margin-bottom:20px; font-weight:500;
+  }
+  .about-text strong{color:var(--text); font-weight:700;}
+  .stat-list{display:flex; flex-direction:column; gap:0;}
+  .stat-item{
+    padding:20px 0; border-bottom:1px solid var(--line);
+    display:flex; justify-content:space-between; align-items:baseline;
+  }
+  .stat-item:first-child{padding-top:0;}
+  .stat-label{font-family:var(--mono); font-size:12px; color:var(--muted); letter-spacing:0.08em;}
+  .stat-value{font-family:var(--body); font-weight:600; font-size:1rem; color:var(--text);}
+
+  /* SKILLS */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:14px;
+  }
+  .skill-chip{
+    font-family:var(--mono); font-size:13px;
+    border:1px solid var(--line);
+    padding:16px 18px;
+    color:var(--muted);
+    transition:all .25s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .skill-chip::before{
+    content:''; position:absolute; inset:0; left:-100%;
+    background:linear-gradient(90deg, transparent, rgba(163,19,26,0.25), transparent);
+    transition:left .5s ease;
+  }
+  .skill-chip:hover{border-color:var(--crimson-bright); color:var(--text);}
+  .skill-chip:hover::before{left:100%;}
+
+  /* PROJECTS */
+  .project-card{
+    border:1px solid var(--line);
+    padding:40px;
+    margin-bottom:20px;
+    transition:border-color .3s ease, background .3s ease;
+    display:grid; grid-template-columns:1fr auto; gap:20px; align-items:start;
+  }
+  .project-card:hover{border-color:var(--crimson); background:rgba(163,19,26,0.05);}
+  .project-name{
+    font-family:var(--display); font-size:1.35rem; text-transform:uppercase; margin-bottom:10px; font-weight:700;
+  }
+  .project-desc{color:var(--muted); font-size:1.02rem; line-height:1.6; max-width:520px; font-weight:500;}
+  .project-tags{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;}
+  .project-tags span{font-family:var(--mono); font-size:11px; color:var(--crimson-bright); border:1px solid var(--crimson); padding:4px 10px;}
+  .project-link{font-family:var(--mono); font-size:12px; color:var(--muted); white-space:nowrap; align-self:center;}
+  .project-card:hover .project-link{color:var(--crimson-bright);}
+
+  /* CONTACT */
+  .contact-inner{text-align:left;}
+  .contact-title{
+    font-family:var(--display); font-weight:900; text-transform:uppercase;
+    font-size:clamp(2rem, 6vw, 4rem); line-height:1.05; max-width:780px;
+  }
+  .contact-title .accent{color:var(--crimson-bright);}
+  .contact-row{
+    margin-top:50px; display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .social-list{
+    margin-top:60px; display:flex; gap:0; flex-wrap:wrap; border-top:1px solid var(--line);
+  }
+  .social-list a{
+    font-family:var(--mono); font-size:13px; color:var(--muted);
+    padding:18px 26px; border-right:1px solid var(--line); border-bottom:1px solid var(--line);
+    transition:color .25s, background .25s;
+  }
+  .social-list a:hover{color:var(--crimson-bright); background:rgba(163,19,26,0.06);}
+
+  footer{
+    padding:36px 0; text-align:center; font-family:var(--mono); font-size:11px; color:var(--muted);
+    border-top:1px solid var(--line); letter-spacing:0.08em;
+  }
+
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+    .project-card{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#top" class="logo">KC<span>_/portfolio</span></a>
+  <div class="navlinks">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+  <section class="hero" style="border-top:none;">
+    <div class="eyebrow">STATUS: ONLINE</div>
+    <h1 class="name">Koushik<br>Chow<span class="accent">dhury</span></h1>
+    <div class="terminal-line">&gt; <span id="typed"></span><span class="cursor"></span></div>
+    <p class="hero-sub">AI/ML Developer and student, focused on machine learning, deep learning, and neural networks — turning math and data into models that actually learn.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">View Work</a>
+      <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+    </div>
+    <div class="scroll-hint"><div class="bar"></div>SCROLL</div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="about">
+    <div class="section-head">
+      <div class="section-tag">01 — About</div>
+      <div class="section-title">Who's behind this</div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p><strong>I'm Koushik Chowdhury</strong>, an AI/ML developer and student. I build and train models — from classic algorithms to neural networks — and I'm always working through the math underneath them.</p>
+        <p>My foundation runs through Python, statistics, linear algebra, and gradient-based optimization, built up into supervised and unsupervised learning, and now into deep learning and neural networks.</p>
+        <p>I learn by building: implementing algorithms from scratch, then rebuilding them with the right tools.</p>
+      </div>
+      <div class="stat-list">
+        <div class="stat-item"><span class="stat-label">ROLE</span><span class="stat-value">AI/ML Developer & Student</span></div>
+        <div class="stat-item"><span class="stat-label">FOCUS</span><span class="stat-value">Machine Learning / Deep Learning</span></div>
+        <div class="stat-item"><span class="stat-label">INTERESTS</span><span class="stat-value">Neural Networks, Optimization</span></div>
+        <div class="stat-item"><span class="stat-label">BASED IN</span><span class="stat-value">West Bengal, IN</span></div>
+        <div class="stat-item"><span class="stat-label">AVAILABILITY</span><span class="stat-value">Open to work</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-head">
+      <div class="section-tag">02 — Skills</div>
+      <div class="section-title">Tools I reach for</div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-chip">Python</div>
+      <div class="skill-chip">Machine Learning</div>
+      <div class="skill-chip">Deep Learning</div>
+      <div class="skill-chip">Neural Networks</div>
+      <div class="skill-chip">NumPy</div>
+      <div class="skill-chip">Pandas</div>
+      <div class="skill-chip">Scikit-learn</div>
+      <div class="skill-chip">TensorFlow</div>
+      <div class="skill-chip">Keras</div>
+      <div class="skill-chip">PyTorch</div>
+      <div class="skill-chip">Matplotlib / Seaborn</div>
+      <div class="skill-chip">Linear Algebra</div>
+      <div class="skill-chip">Statistics</div>
+      <div class="skill-chip">Gradient Descent</div>
+      <div class="skill-chip">Linux</div>
+      <div class="skill-chip">Git / GitHub</div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-head">
+      <div class="section-tag">03 — Work</div>
+      <div class="section-title">Selected projects</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-name">End-to-End ML Project</div>
+        <div class="project-desc">Placeholder — swap in a real project: the problem, the dataset, the model, and the result. Keep it short and specific.</div>
+        <div class="project-tags"><span>Python</span><span>Scikit-learn</span><span>Pandas</span></div>
+      </div>
+      <div class="project-link">Add link →</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-name">Neural Network from Scratch</div>
+        <div class="project-desc">Placeholder — a project showing a neural network built and trained, either from first principles or with a framework.</div>
+        <div class="project-tags"><span>NumPy</span><span>Neural Networks</span></div>
+      </div>
+      <div class="project-link">Add link →</div>
+    </div>
+
+    <div class="project-card">
+      <div>
+        <div class="project-name">Deep Learning Project</div>
+        <div class="project-desc">Placeholder — a deep learning model built with TensorFlow, Keras, or PyTorch. Replace with your actual work and results.</div>
+        <div class="project-tags"><span>TensorFlow</span><span>Keras</span><span>PyTorch</span></div>
+      </div>
+      <div class="project-link">Add link →</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head">
+      <div class="section-tag">04 — Contact</div>
+    </div>
+    <div class="contact-inner">
+      <div class="contact-title">Got something to build? <span class="accent">Let's talk.</span></div>
+      <div class="contact-row">
+        <a href="mailto:your@email.com" class="btn btn-primary">Email Me</a>
+        <a href="#" class="btn btn-ghost">Download Résumé</a>
+      </div>
+    </div>
+    <div class="social-list">
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">X</a>
+      <a href="#">Medium</a>
+    </div>
+  </section>
+</div>
+
+<footer>© 2026 KOUSHIK CHOWDHURY — AI/ML DEVELOPER & STUDENT.</footer>
+
+<script>
+  const phrases = ["training models that don't exist yet", "AI/ML developer & student", "gradient descent by morning, neural nets by night"];
+  const el = document.getElementById('typed');
+  let pi = 0, ci = 0, deleting = false;
+
+  function tick(){
+    const current = phrases[pi];
+    if(!deleting){
+      el.textContent = current.slice(0, ci+1);
+      ci++;
+      if(ci === current.length){ deleting = true; setTimeout(tick, 1800); return; }
+    } else {
+      el.textContent = current.slice(0, ci-1);
+      ci--;
+      if(ci === 0){ deleting = false; pi = (pi+1) % phrases.length; }
+    }
+    setTimeout(tick, deleting ? 35 : 55);
+  }
+  tick();
+</script>
+
+</body>
+</html>
